@@ -1,23 +1,17 @@
-add node0, client0, client1 : JavascriptNode
+add node0, browser: JavascriptNode
 add sync : WSGroup
-add client0.sender : MsgSender
-add client1.sender : MsgSender
-add client0.printer: ConsolePrinter
-add client1.printer: ConsolePrinter
+add browser.sender : MsgSender
+add browser.printer: ConsolePrinter
 
-add chan1, chan2: RemoteWSChan/5.2.9-SNAPSHOT
+add chan: RemoteWSChan/5.2.9-SNAPSHOT
 
-attach node0, client0, client1 sync
+attach node0, browser sync
 
 set sync.master = 'node0'
-set chan1.host = 'ws.kevoree.org'
-set chan2.host = 'ws.kevoree.org'
-set chan1.uuid = 'chan-0001'
-set chan2.uuid = 'chan-0002'
+set chan.host = 'ws.kevoree.org'
+set chan.uuid = 'chan-0001'
 
 network node0.ip.lo 127.0.0.1
 
-bind client0.sender.send chan1
-bind client1.printer.input chan1
-bind client0.printer.input chan2
-bind client1.sender.send chan2
+bind browser.sender.send chan
+bind browser.printer.input chan
